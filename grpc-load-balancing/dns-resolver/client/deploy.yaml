@@ -1,0 +1,27 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: grpc-client
+  labels:
+    app: grpc-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-client
+  template:
+    metadata:
+      labels:
+        app: grpc-client
+    spec:
+      containers:
+        - name: grpc-client
+          # Note that image is modified by skaffold or sync-script
+          # to use a correct tag.
+          image: "grpc-client"
+          imagePullPolicy: Never
+          env:
+            - name: TARGET
+              value: "dns:///grpc-server-headless.grpc.svc.cluster.local:9090"
+            - name: WORKERS
+              value: "2"

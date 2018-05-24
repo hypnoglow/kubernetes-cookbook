@@ -1,0 +1,19 @@
+# See https://github.com/GoogleContainerTools/skaffold
+
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+  - imageName: grpc-server
+    workspace: .
+    docker:
+      dockerfilePath: server/Dockerfile
+  - imageName: grpc-client
+    workspace: .
+    docker:
+      dockerfilePath: client/Dockerfile
+deploy:
+  kubectl:
+    manifests:
+      - server/deploy.yaml
+      - client/deploy.yaml
