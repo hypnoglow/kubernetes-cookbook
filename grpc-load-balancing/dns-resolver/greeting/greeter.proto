@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package greeting;
+
+option go_package = "github.com/hypnoglow/kubernetes-cookbook/grpc-load-balancing/dns-resolver/greeting";
+
+service Greeter {
+    rpc Greet(GreetRequest) returns (GreetReply) {}
+}
+
+message GreetRequest {
+    string name = 1;
+}
+
+message GreetReply {
+    string greeting = 1;
+}
